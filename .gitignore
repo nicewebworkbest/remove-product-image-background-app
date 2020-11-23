@@ -105,3 +105,6 @@ dist
 
 # next.js
 /.next/
+
+# product image files
+product-images/*.*
