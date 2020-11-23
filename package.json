@@ -8,6 +8,9 @@
     "dev": "node server.js",
     "start": "NODE_ENV=production node server.js"
   },
+  "engines": {
+    "node": "=12.19.1"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
