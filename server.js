@@ -8,6 +8,8 @@ var router = express.Router();
 const bodyParser = require('body-parser');
 const app = express();
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 const Shopify = require('shopify-api-node');
 const removeRegisteredWebhook = require('./services/removeRegisteredWebhook');
 const removeImageBackground = require('./services/removeImageBackground');
@@ -159,6 +161,23 @@ router.get('/webhooks/products/create-update', async (req, res) => {
 	// res.sendStatus(200);
 });
 
+/* Delete all the images from the server */
+router.get('/delete-images', async (req, res) => {
+	const directory = IMAGE_DIR_PATH;
+
+	fs.readdir(directory, (err, files) => {
+		if (err) throw err;
+
+		for (const file of files) {
+			console.log( file );
+			if (file == '.htaccess') continue;
+			fs.unlink(path.join(directory, file), err => {
+				if (err) throw err;
+			});
+		}
+	});
+	res.send('All the images were removed!');
+});
 app.use('/', router);
 
 app.listen(port, () => {
