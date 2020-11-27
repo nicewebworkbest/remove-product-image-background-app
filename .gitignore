@@ -107,4 +107,5 @@ dist
 /.next/
 
 # product image files
-product-images/*.*
+product-images/*.jpg
+product-images/*.png
